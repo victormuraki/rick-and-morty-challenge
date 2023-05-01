@@ -4,8 +4,8 @@
             <v-row dense>
                 <v-col
                     v-for="card in cards"
-                    :key="card.title"
-                    :cols="card.flex"
+                    :key="card.id"
+                    :cols="4"
                 >
                 <CharacterCard
                     :cards-data="card"
@@ -17,7 +17,9 @@
 </template>
   
 <script>
+
 import CharacterCard from '@/components/CharacterCard.vue';
+import { rickAndMortyServices } from '@/services/apiServices/rick-and-morty';
 
 export default {
     name: 'CardsView',
@@ -25,13 +27,16 @@ export default {
         CharacterCard,
     },
     data: () => ({
-        cards: [
-            { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 6 },
-            { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 6 },
-            { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6 },
-            { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6 },
-            { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6 }
-        ],
+        cards: [],
     }),
+    created () {
+        this.fetchDataCards();
+    },
+    methods: {
+        async fetchDataCards() {
+            const getData = await rickAndMortyServices.getCharacters();
+            this.cards = getData.data;
+        }
+    },
 }
 </script>

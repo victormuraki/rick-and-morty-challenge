@@ -1,14 +1,14 @@
 <template>
     <v-card>
         <v-img
-            :src="cardsData.src"
+            :src="cardsData.image"
             class="align-end"
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="200px"
             cover
         />
         <v-card-actions>
-            <span>{{ cardsData.title }}</span>
+            <span>{{ cardsData.name }}</span>
             <v-spacer />
             <v-btn icon color="surface-variant">
                 <v-icon>mdi-heart</v-icon>
