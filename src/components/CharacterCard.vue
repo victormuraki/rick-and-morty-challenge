@@ -8,7 +8,7 @@
             cover
         />
         <v-card-actions>
-            <span>{{ cardsData.name }}</span>
+            <span>{{ handleCardNameMask }}</span>
             <v-spacer />
             <v-btn icon color="surface-variant">
                 <v-icon>mdi-heart</v-icon>
@@ -25,6 +25,14 @@ export default {
             type: Object,
             default: () => {}
         },
+    },
+    computed: {
+        handleCardNameMask() {
+            if (this.cardsData.name.length > 15) {
+                return this.cardsData.name.substring(0, 15) + '...'
+            }
+            return this.cardsData.name
+        }
     },
 }
 </script>

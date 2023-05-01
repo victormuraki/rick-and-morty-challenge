@@ -1,10 +1,16 @@
 import Axios from "axios";
 
 export const rickAndMortyServices = {
-    getCharacters: async () => {
-        const response = await Axios.get("https://rickandmortyapi.com/api/character/")
-        return {
-            data: response.data.results
+    getCharacters: async (page) => {
+        try {
+            const response = await Axios.get(`https://rickandmortyapi.com/api/character/?page=${page}`)
+            return {
+                data: response.data.results
+            }    
+        } catch(err) {
+            return {
+                data: []
+            }
         }
     }
 }
