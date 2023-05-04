@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form @submit.prevent="fetchCriteria">
     <v-container>
       <v-row>
         <v-col cols="12">
@@ -11,7 +11,8 @@
             clearable
             label="Busque por um personagem"
             type="text"
-            @click:append="sendMessage"
+            @click:append="fetchCriteria"
+            @click:clear="clearMessage"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -20,17 +21,26 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
   export default {
     data: () => ({
       message: '',
     }),
 
     methods: {
-      sendMessage () {
-        console.log('teste')
+      ...mapActions({
+        setSearchName: 'setSearchName',
+        setCurrentPage: 'setCurrentPage'
+    }),
+      fetchCriteria() {
+        this.setSearchName(this.message)
+        this.setCurrentPage(1)
       },
-      clearMessage () {
+      clearMessage() {
         this.message = ''
+        this.setCurrentPage(1)
+        this.setSearchName('')
       }
     },
   }

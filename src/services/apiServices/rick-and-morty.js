@@ -2,11 +2,11 @@ import Axios from "axios";
 import store from '../../store'
 
 export const rickAndMortyServices = {
-    getCharacters: async (page) => {
+    getCharacters: async () => {
         try {
             const params = {
-                page: page,
-                name: store.getters.getCriteria.searchName
+                page: store.getters.getCurrentPage,
+                name: store.getters.getSearchName
             }
             const response = await Axios.get('https://rickandmortyapi.com/api/character/', { params })
             return {

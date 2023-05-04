@@ -4,7 +4,7 @@
       color="primary"
       dark
       >
-      <v-toolbar-title>Deloitte Challenge</v-toolbar-title>
+      <v-toolbar-title>Rick and Morty Catalog</v-toolbar-title>
         <v-spacer></v-spacer>
   
         <v-btn icon>

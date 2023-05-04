@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     favorites: [],
     criteria: {
-      page: 0,
+      page: 1,
       searchName: '',
       location: ''
     }
@@ -17,7 +17,13 @@ export default new Vuex.Store({
       return state.favorites
     },
     getCriteria(state) {
-      return state.favorites
+      return state.criteria
+    },
+    getSearchName(state) {
+      return state.criteria.searchName
+    },
+    getCurrentPage(state) {
+      return state.criteria.page
     }
   },
   mutations: {
@@ -29,6 +35,12 @@ export default new Vuex.Store({
     },
     removeFavorite(state, payload) {
       state.favorites.splice(state.favorites.indexOf(payload), 1)
+    },
+    setSearchName(state, payload) {
+      state.criteria.searchName = payload
+    },
+    setCurrentPage(state, payload) {
+      state.criteria.page = payload
     }
   },
   actions: {
@@ -40,6 +52,13 @@ export default new Vuex.Store({
     },
     removeFavorite({ commit }, payload) {
       commit('removeFavorite', payload)
+    },
+    setSearchName({ commit }, payload) {
+      commit('setSearchName', payload)
+    },
+    setCurrentPage({ commit }, payload) {
+      commit('setCurrentPage', payload)
     }
+
   }
 })
