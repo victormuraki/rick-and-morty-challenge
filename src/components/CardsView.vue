@@ -1,6 +1,7 @@
 <template>
     <v-card class="mx-auto">
         <v-container fluid>
+            <SearchBar />
             <v-row dense>
                 <v-col v-for="card in cards" :key="card.id" :cols="6">
                     <CharacterCard :cards-data="card" />
@@ -14,12 +15,14 @@
 <script>
 
 import CharacterCard from '@/components/CharacterCard.vue';
+import SearchBar from '@/components/SearchBar.vue';
 import { rickAndMortyServices } from '@/services/apiServices/rick-and-morty';
 
 export default {
     name: 'CardsView',
     components: {
         CharacterCard,
+        SearchBar
     },
     data: () => ({
         cards: [],

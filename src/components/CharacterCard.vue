@@ -10,7 +10,7 @@
         <v-card-actions>
             <span>{{ handleCardNameMask }}</span>
             <v-spacer />
-            <v-btn icon color="surface-variant">
+            <v-btn @click="handleFavoriteClick" icon :color="handleButtonColor">
                 <v-icon>mdi-heart</v-icon>
             </v-btn>
         </v-card-actions>
@@ -18,6 +18,9 @@
 </template>
 
 <script>
+import localstorage from '@/services/localstorage/localstorage'
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
     name: 'CharacterCard',
     props: {
@@ -26,12 +29,35 @@ export default {
             default: () => {}
         },
     },
+    methods: {
+        ...mapActions({
+            addFavorite: 'addFavorite'
+        }),
+        handleFavoriteClick() {
+            return this.isFavorited ? this.removeIdFromFavorite() : this.setFavoriteCharacter()
+        },
+        setFavoriteCharacter() {
+            localstorage('favoriteCharacter').addFavorites(this.cardsData.id)
+        },
+        removeIdFromFavorite() {
+            localstorage('favoriteCharacter').removeFavorite(this.cardsData.id)
+        }
+    },
     computed: {
+        ...mapGetters({
+            getFavorites: 'getFavorites'
+        }),
         handleCardNameMask() {
             if (this.cardsData.name.length > 15) {
                 return this.cardsData.name.substring(0, 15) + '...'
             }
             return this.cardsData.name
+        },
+        handleButtonColor() {
+            return this.getFavorites.includes(this.cardsData.id) ? 'red' : 'surface-variant'
+        },
+        isFavorited() {
+            return this.getFavorites.includes(this.cardsData.id)
         }
     },
 }
