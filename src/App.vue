@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <SubHeader />
-      <CardsView />
+      <CatalogHome />
       <FooterBar />
     </v-main>
   </v-app>
@@ -14,14 +14,14 @@ import { mapActions } from 'vuex'
 
 import SubHeader from '@/components/SubHeader.vue';
 import FooterBar from '@/components/FooterBar.vue';
-import CardsView from '@/components/CardsView.vue';
+import CatalogHome from '@/components/CatalogHome.vue';
 
 export default {
   name: "App",
   data: () => ({
     //
   }),
-  components: { SubHeader, FooterBar, CardsView },
+  components: { SubHeader, FooterBar, CatalogHome },
   created() {
     this.recoverFavoritesAtStore();
   },

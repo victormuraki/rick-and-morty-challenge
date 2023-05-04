@@ -1,10 +1,9 @@
 <template>
     <v-card class="mx-auto">
-        <v-container fluid>
-            <SearchBar />
+        <v-container fluid >
             <v-row dense>
-                <v-col v-for="card in cards" :key="card.id" cols="12" md="6" lg="2">
-                    <CharacterCard :cards-data="card" />
+                <v-col class="mx-auto" v-for="card in cards" :key="card.id" cols="5" md="4" lg="2">
+                    <CharacterCard :cards-data="card" class="my-3"/>
                 </v-col>
             </v-row>
         </v-container>
@@ -16,17 +15,14 @@
 import { rickAndMortyServices } from '@/services/apiServices/rick-and-morty';
 import { mapActions, mapGetters } from 'vuex'
 import CharacterCard from '@/components/CharacterCard.vue';
-import SearchBar from '@/components/SearchBar.vue';
 
 export default {
     name: 'CardsView',
     components: {
-        CharacterCard,
-        SearchBar
+        CharacterCard
     },
     data: () => ({
-        cards: [],
-        page: 1
+        cards: []
     }),
     created() {
         this.fetchDataCards();

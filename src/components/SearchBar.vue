@@ -6,9 +6,10 @@
           <v-text-field
             v-model="message"
             append-icon="mdi-magnify"
-            variant="filled"
             clear-icon="mdi-close-circle"
+            solo
             clearable
+            hide-details
             label="Busque por um personagem"
             type="text"
             @click:append="fetchCriteria"
@@ -45,3 +46,10 @@ import { mapActions } from 'vuex'
     },
   }
 </script>
+
+<style scoped>
+.input-field {
+  background: #ffffff;
+}
+
+</style>

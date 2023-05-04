@@ -8,14 +8,6 @@
   
   <script>
     export default {
-      name: 'FooterBar',
-      data: () => ({
-        icons: [
-          'mdi-facebook',
-          'mdi-twitter',
-          'mdi-linkedin',
-          'mdi-instagram',
-        ],
-      }),
+      name: 'FooterBar'
     }
   </script>
