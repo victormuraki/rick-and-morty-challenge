@@ -17,5 +17,17 @@ export const rickAndMortyServices = {
                 data: []
             }
         }
+    },
+    getSingleCharacters: async (id) => {
+        try {
+            const response = await Axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+            return {
+                data: response.data
+            }
+        } catch(err) {
+            return {
+                data: []
+            }
+        }
     }
 }

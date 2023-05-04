@@ -2,8 +2,7 @@
   <v-app>
     <v-main>
       <SubHeader />
-      <CatalogHome />
-      <FooterBar />
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
@@ -11,17 +10,14 @@
 <script>
 import localstorage from '@/services/localstorage/localstorage'
 import { mapActions } from 'vuex'
+import router from './routes'
 
 import SubHeader from '@/components/SubHeader.vue';
-import FooterBar from '@/components/FooterBar.vue';
-import CatalogHome from '@/components/CatalogHome.vue';
 
 export default {
   name: "App",
-  data: () => ({
-    //
-  }),
-  components: { SubHeader, FooterBar, CatalogHome },
+  router,
+  components: { SubHeader },
   created() {
     this.recoverFavoritesAtStore();
   },

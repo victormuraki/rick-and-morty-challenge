@@ -8,7 +8,7 @@
             cover
         />
         <v-card-actions>
-            <span>{{ handleCardNameMask }}</span>
+            <router-link class="black--text" :to="`/character/${cardsData.id}`">{{ handleCardNameMask }}</router-link>
             <v-spacer />
             <v-btn @click="handleFavoriteClick" icon :color="handleButtonColor">
                 <v-icon>mdi-heart</v-icon>
@@ -62,3 +62,10 @@ export default {
     },
 }
 </script>
+
+<style scoped>
+a {
+    text-decoration: none;
+}
+
+</style>

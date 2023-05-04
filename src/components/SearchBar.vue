@@ -10,7 +10,7 @@
             solo
             clearable
             hide-details
-            label="Busque por um personagem"
+            label="Search by name"
             type="text"
             @click:append="fetchCriteria"
             @click:clear="clearMessage"

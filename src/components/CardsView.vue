@@ -25,7 +25,7 @@ export default {
         cards: []
     }),
     created() {
-        this.fetchDataCards();
+        this.fetchDataCards()
     },
     watch: {
         getSearchName() {
@@ -40,9 +40,11 @@ export default {
     },
     methods: {
         ...mapActions({
-            setCurrentPage: 'setCurrentPage'
+            setCurrentPage: 'setCurrentPage',
+            setSearchName: 'setSearchName'
         }),
         async fetchDataCards() {
+            this.setCurrentPage(1);
             const getData = await rickAndMortyServices.getCharacters()
             this.cards = getData.data
         },
