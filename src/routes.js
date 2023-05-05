@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import CatalogHome from '@/views/CatalogHome.vue';
-import CharacterDetails from '@/views/CharacterDetails.vue';
+import CatalogHome from '@/views/CatalogHome.vue'
+import CharacterDetails from '@/views/CharacterDetails.vue'
 
 Vue.use(Router)
 

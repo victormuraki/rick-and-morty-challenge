@@ -12,14 +12,14 @@ import localstorage from '@/services/localstorage/localstorage'
 import { mapActions } from 'vuex'
 import router from './routes'
 
-import SubHeader from '@/components/SubHeader.vue';
+import SubHeader from '@/components/SubHeader.vue'
 
 export default {
   name: "App",
   router,
   components: { SubHeader },
   created() {
-    this.recoverFavoritesAtStore();
+    this.recoverFavoritesAtStore()
   },
   methods: {
     ...mapActions({

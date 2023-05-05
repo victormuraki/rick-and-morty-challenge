@@ -44,9 +44,6 @@ export default {
             currentDate: '',
         }
     },
-    mounted() {
-        this.fetchSingleCharacterData()
-    },
     computed: {
         ...mapGetters({
             getSearchName: 'getSearchName'
@@ -54,6 +51,9 @@ export default {
         isDeadCharacter() {
             return this.characterData.status === 'Dead'
         }
+    },
+    mounted() {
+        this.fetchSingleCharacterData()
     },
     methods: {
         ...mapActions({
