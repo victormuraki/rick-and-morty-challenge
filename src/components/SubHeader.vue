@@ -16,11 +16,11 @@
           </v-list-item>
           <v-divider></v-divider>
         </div>
-        <v-list-item :disabled="Boolean(!this.getFavoritesIdToSearch.length)" clickable @click="clearFavoriteView">
-          <v-list-item-title>Clear Favorites filter</v-list-item-title>
-        </v-list-item>
         <v-list-item :disabled="Boolean(this.getFavoritesIdToSearch.length)" clickable @click="setFavoriteView">
           <v-list-item-title>Favorites</v-list-item-title>
+        </v-list-item>
+        <v-list-item :disabled="Boolean(!this.getFavoritesIdToSearch.length)" clickable @click="clearFavoriteView">
+          <v-list-item-title>Clear Favorites filter</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

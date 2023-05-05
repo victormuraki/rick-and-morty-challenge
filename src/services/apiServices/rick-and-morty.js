@@ -8,9 +8,11 @@ export const rickAndMortyServices = {
                 page: store.getters.getCurrentPage,
                 name: store.getters.getSearchName
             }
-            const { data: { results } } = await Axios.get('https://rickandmortyapi.com/api/character/', { params })
+            const { data: { results, info: { next } } } = await Axios.get('https://rickandmortyapi.com/api/character/', { params })
             return {
-                data: results
+                data: results,
+                next: next
+
             }
         } catch (err) {
             return {

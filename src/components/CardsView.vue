@@ -22,7 +22,8 @@ export default {
         CharacterCard
     },
     data: () => ({
-        cards: []
+        cards: [],
+        hasNextPage: true
     }),
     computed: {
         ...mapGetters({
@@ -49,6 +50,7 @@ export default {
         async fetchDataCards() {
             this.setCurrentPage(1)
             const getData = await rickAndMortyServices.getCharacters()
+            this.hasNextPage = true
             this.cards = getData.data
         },
         async fetchDataCardsToFavorites() {
@@ -57,9 +59,11 @@ export default {
             this.cards = getData.data
         },
         async infiniteScrolling() {
-            if (this.isFavoriteView) return
+            if (this.isFavoriteView || !this.hasNextPage) return
+
             this.setCurrentPage(this.getCurrentPage + 1)
             const getData = await rickAndMortyServices.getCharacters()
+            this.hasNextPage = getData.next ? true : false
             getData.data.forEach(item => this.cards.push(item))
         },
         updateFavoritesDataCards() {
