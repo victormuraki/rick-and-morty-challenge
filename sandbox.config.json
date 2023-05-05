@@ -1,5 +1,7 @@
 {
   "devServer": {
-    "disableHostCheck": true
+    "allowedHosts": [
+      ".codesandbox.io"
+    ]
   }
 }
