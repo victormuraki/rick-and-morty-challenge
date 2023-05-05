@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import HeroHome from '@/components/HeroHome.vue';
-import CardsView from '@/components/CardsView.vue';
-import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'
+import HeroHome from '@/components/HeroHome.vue'
+import CardsView from '@/components/CardsView.vue'
 
 export default {
     name: 'CatalogHome',
@@ -16,7 +16,7 @@ export default {
         HeroHome,
         CardsView
     },
-    mounted () {
+    mounted() {
         this.setCurrentPage(0)
         this.setSearchName('')
     },

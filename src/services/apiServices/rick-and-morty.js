@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios from "axios"
 import store from '../../store'
 
 export const rickAndMortyServices = {
@@ -8,11 +8,11 @@ export const rickAndMortyServices = {
                 page: store.getters.getCurrentPage,
                 name: store.getters.getSearchName
             }
-            const response = await Axios.get('https://rickandmortyapi.com/api/character/', { params })
+            const { data: { results } } = await Axios.get('https://rickandmortyapi.com/api/character/', { params })
             return {
-                data: response.data.results
-            }    
-        } catch(err) {
+                data: results
+            }
+        } catch (err) {
             return {
                 data: []
             }
@@ -20,11 +20,11 @@ export const rickAndMortyServices = {
     },
     getSingleCharacters: async (id) => {
         try {
-            const response = await Axios.get(`https://rickandmortyapi.com/api/character/${id}`)
+            const { data } = await Axios.get(`https://rickandmortyapi.com/api/character/${id}`)
             return {
-                data: response.data
+                data: data
             }
-        } catch(err) {
+        } catch (err) {
             return {
                 data: []
             }

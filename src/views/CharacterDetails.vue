@@ -13,7 +13,7 @@
                     <v-icon v-else class="green--text lighten-2" size="10">
                         mdi-circle
                     </v-icon>
-                    <span :class="{'red--text': characterData.status === 'Dead'}">
+                    <span :class="{ 'red--text': characterData.status === 'Dead' }">
                         {{ characterData.status }}
                     </span>
                 </v-card-text>
@@ -32,8 +32,8 @@
 
 <script>
 import { rickAndMortyServices } from '@/services/apiServices/rick-and-morty'
+import { mapActions, mapGetters } from 'vuex'
 import CardsView from '@/components/CardsView'
-import { mapActions, mapGetters } from 'vuex';
 
 export default {
     name: 'CharacterDetails',

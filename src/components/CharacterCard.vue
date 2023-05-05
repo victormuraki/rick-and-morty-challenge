@@ -1,12 +1,7 @@
 <template>
     <v-card>
-        <v-img
-            :src="cardsData.image"
-            class="align-end"
-            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-            height="200px"
-            cover
-        />
+        <v-img :src="cardsData.image" class="align-end" gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)" height="200px"
+            cover />
         <v-card-actions>
             <router-link class="black--text" :to="`/character/${cardsData.id}`">{{ handleCardNameMask }}</router-link>
             <v-spacer />
@@ -26,22 +21,8 @@ export default {
     props: {
         cardsData: {
             type: Object,
-            default: () => {}
+            default: () => { }
         },
-    },
-    methods: {
-        ...mapActions({
-            addFavorite: 'addFavorite'
-        }),
-        handleFavoriteClick() {
-            return this.isFavorited ? this.removeIdFromFavorite() : this.setFavoriteCharacter()
-        },
-        setFavoriteCharacter() {
-            localstorage('favoriteCharacter').addFavorites(this.cardsData.id)
-        },
-        removeIdFromFavorite() {
-            localstorage('favoriteCharacter').removeFavorite(this.cardsData.id)
-        }
     },
     computed: {
         ...mapGetters({
@@ -60,6 +41,20 @@ export default {
             return this.getFavorites.includes(this.cardsData.id)
         }
     },
+    methods: {
+        ...mapActions({
+            addFavorite: 'addFavorite'
+        }),
+        handleFavoriteClick() {
+            return this.isFavorited ? this.removeIdFromFavorite() : this.setFavoriteCharacter()
+        },
+        setFavoriteCharacter() {
+            localstorage('favoriteCharacter').addFavorites(this.cardsData.id)
+        },
+        removeIdFromFavorite() {
+            localstorage('favoriteCharacter').removeFavorite(this.cardsData.id)
+        }
+    }
 }
 </script>
 
@@ -67,5 +62,4 @@ export default {
 a {
     text-decoration: none;
 }
-
 </style>

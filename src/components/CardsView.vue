@@ -1,9 +1,9 @@
 <template>
     <v-card class="mx-auto">
-        <v-container fluid >
+        <v-container fluid>
             <v-row dense>
                 <v-col class="mx-auto" v-for="card in cards" :key="card.id" cols="5" md="4" lg="2">
-                    <CharacterCard :cards-data="card" class="my-3"/>
+                    <CharacterCard :cards-data="card" class="my-3" />
                 </v-col>
             </v-row>
         </v-container>
@@ -24,14 +24,6 @@ export default {
     data: () => ({
         cards: []
     }),
-    watch: {
-        getSearchName() {
-            this.fetchDataCards()
-        },
-        getFavoritesIdToSearch() {
-            return this.isFavoriteView ? this.fetchDataCardsToFavorites() : this.fetchDataCards()
-        }
-    },
     computed: {
         ...mapGetters({
             getCurrentPage: 'getCurrentPage',
@@ -40,6 +32,14 @@ export default {
         }),
         isFavoriteView() {
             return this.getFavoritesIdToSearch.length
+        }
+    },
+    watch: {
+        getSearchName() {
+            return this.isFavoriteView ? this.updateFavoritesDataCards() : this.fetchDataCards()
+        },
+        getFavoritesIdToSearch() {
+            return this.isFavoriteView ? this.fetchDataCardsToFavorites() : this.fetchDataCards()
         }
     },
     methods: {
@@ -61,6 +61,13 @@ export default {
             this.setCurrentPage(this.getCurrentPage + 1)
             const getData = await rickAndMortyServices.getCharacters()
             getData.data.forEach(item => this.cards.push(item))
+        },
+        updateFavoritesDataCards() {
+            const filteredFavorites = this.cards.filter((item) => {
+                const formatNameToCompare = item.name.toLowerCase().split(' ')
+                return formatNameToCompare.includes(this.getSearchName.toLowerCase())
+            })
+            this.cards = filteredFavorites
         }
     },
 }

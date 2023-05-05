@@ -16,46 +16,37 @@
           </v-list-item>
           <v-divider></v-divider>
         </div>
-        <v-list-item clickable @click="clearFavoriteView">
-          <v-list-item-title>Clear filter</v-list-item-title>
+        <v-list-item :disabled="Boolean(!this.getFavoritesIdToSearch.length)" clickable @click="clearFavoriteView">
+          <v-list-item-title>Clear Favorites filter</v-list-item-title>
         </v-list-item>
-        <v-list-item clickable @click="setFavoriteView">
+        <v-list-item :disabled="Boolean(this.getFavoritesIdToSearch.length)" clickable @click="setFavoriteView">
           <v-list-item-title>Favorites</v-list-item-title>
         </v-list-item>
-        <v-list-group>
-          <template v-slot:activator>
-            <v-list-item-title>Filters</v-list-item-title>
-          </template>
-          <v-list-item>
-            <v-list-item-title>Human</v-list-item-title>
-          </v-list-item>
-          <v-list-item>
-            <v-list-item-title>Alien</v-list-item-title>
-          </v-list-item>
-        </v-list-group>
       </v-list>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'SubHeader',
   data() {
     return {
       drawer: false,
-    };
+    }
   },
   computed: {
     ...mapGetters({
-      getFavorites: 'getFavorites'
+      getFavorites: 'getFavorites',
+      getFavoritesIdToSearch: 'getFavoritesIdToSearch'
     }),
   },
   methods: {
     ...mapActions({
-      setFavoritesIdToSearch: 'setFavoritesIdToSearch'
+      setFavoritesIdToSearch: 'setFavoritesIdToSearch',
+      setSearchName: 'setSearchName'
     }),
     setFavoriteView() {
       const favoritesIdArrayToString = this.getFavorites.join(',')
@@ -63,6 +54,7 @@ export default {
     },
     clearFavoriteView() {
       this.setFavoritesIdToSearch('')
+      this.setSearchName('')
     },
     goToHomePage() {
       this.$router.push('/')

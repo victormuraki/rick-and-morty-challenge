@@ -11,7 +11,7 @@ export default (key) => {
         addFavorites(value) {
             const currentFavorites = JSON.parse(localStorage.getItem('favoriteCharacter'))
             const isDuplicatedId = currentFavorites.length ? currentFavorites.find(id => id === value) : false
-            
+
             if (!currentFavorites.length) {
                 localStorage.setItem('favoriteCharacter', JSON.stringify([value]))
                 store.dispatch('addFavorite', value)
@@ -29,7 +29,7 @@ export default (key) => {
         removeFavorite(value) {
             const currentFavorites = JSON.parse(localStorage.getItem('favoriteCharacter'))
             const favoriteIndex = currentFavorites.findIndex(id => id === value)
-            
+
             if (favoriteIndex === -1) return
             currentFavorites.splice(favoriteIndex, 1)
             store.dispatch('removeFavorite', value)
