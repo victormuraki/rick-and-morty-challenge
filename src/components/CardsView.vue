@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import { rickAndMortyServices } from '@/services/apiServices/rick-and-morty';
+import { rickAndMortyServices } from '@/services/apiServices/rick-and-morty'
 import { mapActions, mapGetters } from 'vuex'
-import CharacterCard from '@/components/CharacterCard.vue';
+import CharacterCard from '@/components/CharacterCard.vue'
 
 export default {
     name: 'CardsView',
@@ -24,31 +24,40 @@ export default {
     data: () => ({
         cards: []
     }),
-    created() {
-        this.fetchDataCards()
-    },
     watch: {
         getSearchName() {
             this.fetchDataCards()
+        },
+        getFavoritesIdToSearch() {
+            return this.isFavoriteView ? this.fetchDataCardsToFavorites() : this.fetchDataCards()
         }
     },
     computed: {
         ...mapGetters({
             getCurrentPage: 'getCurrentPage',
-            getSearchName: 'getSearchName'
+            getSearchName: 'getSearchName',
+            getFavoritesIdToSearch: 'getFavoritesIdToSearch'
         }),
+        isFavoriteView() {
+            return this.getFavoritesIdToSearch.length
+        }
     },
     methods: {
         ...mapActions({
-            setCurrentPage: 'setCurrentPage',
-            setSearchName: 'setSearchName'
+            setCurrentPage: 'setCurrentPage'
         }),
         async fetchDataCards() {
-            this.setCurrentPage(1);
+            this.setCurrentPage(1)
             const getData = await rickAndMortyServices.getCharacters()
             this.cards = getData.data
         },
+        async fetchDataCardsToFavorites() {
+            this.setCurrentPage(1)
+            const getData = await rickAndMortyServices.getSingleCharacters(this.getFavoritesIdToSearch)
+            this.cards = getData.data
+        },
         async infiniteScrolling() {
+            if (this.isFavoriteView) return
             this.setCurrentPage(this.getCurrentPage + 1)
             const getData = await rickAndMortyServices.getCharacters()
             getData.data.forEach(item => this.cards.push(item))

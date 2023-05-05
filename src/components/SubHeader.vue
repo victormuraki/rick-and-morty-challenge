@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="black" dark>
       <v-toolbar-title>
         <v-btn icon @click="drawer = !drawer">
           <v-icon>mdi-menu</v-icon>
@@ -10,21 +10,27 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" app>
       <v-list>
-        <v-list-item>
-          <v-list-item-title>Menu Item 1</v-list-item-title>
+        <div v-if="this.$route.params.id">
+          <v-list-item clickable @click="goToHomePage">
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item>
+          <v-divider></v-divider>
+        </div>
+        <v-list-item clickable @click="clearFavoriteView">
+          <v-list-item-title>Clear filter</v-list-item-title>
         </v-list-item>
-        <v-list-item>
-          <v-list-item-title>Menu Item 2</v-list-item-title>
+        <v-list-item clickable @click="setFavoriteView">
+          <v-list-item-title>Favorites</v-list-item-title>
         </v-list-item>
         <v-list-group>
           <template v-slot:activator>
-            <v-list-item-title>Menu Item 3</v-list-item-title>
+            <v-list-item-title>Filters</v-list-item-title>
           </template>
           <v-list-item>
-            <v-list-item-title>Submenu Item 1</v-list-item-title>
+            <v-list-item-title>Human</v-list-item-title>
           </v-list-item>
           <v-list-item>
-            <v-list-item-title>Submenu Item 2</v-list-item-title>
+            <v-list-item-title>Alien</v-list-item-title>
           </v-list-item>
         </v-list-group>
       </v-list>
@@ -33,6 +39,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   name: 'SubHeader',
   data() {
@@ -40,5 +48,25 @@ export default {
       drawer: false,
     };
   },
-};
+  computed: {
+    ...mapGetters({
+      getFavorites: 'getFavorites'
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setFavoritesIdToSearch: 'setFavoritesIdToSearch'
+    }),
+    setFavoriteView() {
+      const favoritesIdArrayToString = this.getFavorites.join(',')
+      this.setFavoritesIdToSearch(favoritesIdArrayToString)
+    },
+    clearFavoriteView() {
+      this.setFavoritesIdToSearch('')
+    },
+    goToHomePage() {
+      this.$router.push('/')
+    }
+  },
+}
 </script>

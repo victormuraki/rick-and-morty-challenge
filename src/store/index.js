@@ -9,7 +9,8 @@ export default new Vuex.Store({
     criteria: {
       page: 1,
       searchName: '',
-      location: ''
+      location: '',
+      favoritesIdToSearch: ''
     }
   },
   getters: {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     getCurrentPage(state) {
       return state.criteria.page
+    },
+    getFavoritesIdToSearch(state) {
+      return state.criteria.favoritesIdToSearch
     }
   },
   mutations: {
@@ -41,6 +45,9 @@ export default new Vuex.Store({
     },
     setCurrentPage(state, payload) {
       state.criteria.page = payload
+    },
+    setFavoritesIdToSearch(state, payload) {
+      state.criteria.favoritesIdToSearch = payload
     }
   },
   actions: {
@@ -58,7 +65,9 @@ export default new Vuex.Store({
     },
     setCurrentPage({ commit }, payload) {
       commit('setCurrentPage', payload)
+    },
+    setFavoritesIdToSearch({ commit }, payload) {
+      commit('setFavoritesIdToSearch', payload)
     }
-
   }
 })

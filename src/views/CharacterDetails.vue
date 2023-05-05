@@ -24,6 +24,8 @@
                 <v-card-text class="pb-0"> Episodes: {{ characterData.episode.length }}</v-card-text>
             </v-col>
         </v-row>
+        <v-divider class="pb-5"></v-divider>
+        <h2 class="pb-4">Similar Characters</h2>
         <CardsView class="pt-2" />
     </v-container>
 </template>
