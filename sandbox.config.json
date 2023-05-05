@@ -1,7 +1,6 @@
 {
   "devServer": {
-    "allowedHosts": [
-      ".codesandbox.io"
-    ]
+    "compress": true,
+    "disableHostCheck": true
   }
 }
